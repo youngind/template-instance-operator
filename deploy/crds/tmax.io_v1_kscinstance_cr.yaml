@@ -1,0 +1,7 @@
+apiVersion: tmax.io/v1
+kind: KscInstance
+metadata:
+  name: example-kscinstance
+spec:
+  # Add fields here
+  size: 3
