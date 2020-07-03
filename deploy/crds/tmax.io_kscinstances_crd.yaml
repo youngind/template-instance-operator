@@ -30,9 +30,135 @@ spec:
           type: object
         spec:
           description: KscInstanceSpec defines the desired state of KscInstance
+          properties:
+            requester:
+              properties:
+                extra:
+                  type: object
+                  x-kubernetes-embedded-resource: true
+                  x-kubernetes-preserve-unknown-fields: true
+                groups:
+                  items:
+                    type: string
+                  type: array
+                type:
+                  type: object
+                uid:
+                  type: string
+                username:
+                  type: string
+              type: object
+            secret:
+              properties:
+                name:
+                  type: string
+                type:
+                  type: object
+              type: object
+            template:
+              properties:
+                apiVersion:
+                  type: string
+                kind:
+                  type: string
+                labels:
+                  properties:
+                    additionalProperties:
+                      type: string
+                    type:
+                      type: object
+                  type: object
+                message:
+                  type: string
+                metadata:
+                  properties:
+                    generateName:
+                      type: string
+                    name:
+                      type: string
+                    type:
+                      type: object
+                  type: object
+                objects:
+                  items:
+                    type: object
+                    x-kubernetes-embedded-resource: true
+                    x-kubernetes-preserve-unknown-fields: true
+                  type: array
+                parameters:
+                  items:
+                    properties:
+                      description:
+                        type: string
+                      displayName:
+                        type: string
+                      from:
+                        type: string
+                      generate:
+                        type: string
+                      name:
+                        type: string
+                      required:
+                        type: boolean
+                      type:
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  type: array
+                type:
+                  type: object
+              type: object
           type: object
         status:
           description: KscInstanceStatus defines the observed state of KscInstance
+          properties:
+            conditions:
+              items:
+                properties:
+                  lastTransitionTime:
+                    format: date-time
+                    type: string
+                  message:
+                    type: string
+                  reason:
+                    type: string
+                  status:
+                    type: string
+                  type:
+                    type: string
+                required:
+                - type
+                type: object
+              type: array
+            objects:
+              items:
+                properties:
+                  ref:
+                    properties:
+                      apiVersion:
+                        type: string
+                      fieldPath:
+                        type: string
+                      kind:
+                        type: string
+                      name:
+                        type: string
+                      namespace:
+                        type: string
+                      resourceVersion:
+                        type: string
+                      type:
+                        type: object
+                      uid:
+                        type: string
+                    type: object
+                required:
+                - ref
+                type: object
+              type: array
+            type:
+              type: object
           type: object
       type: object
   version: v1
