@@ -1,7 +1,9 @@
 apiVersion: tmax.io/v1
 kind: KscInstance
 metadata:
-  name: example-kscinstance
+  name: ksc-template-instance
 spec:
   # Add fields here
-  size: 3
+        template:
+                metadata:
+                        name: kwontest

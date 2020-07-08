@@ -3,8 +3,14 @@ module template-instance-operator
 go 1.13
 
 require (
+	github.com/Azure/go-autorest/autorest/adal v0.5.0
+	github.com/ghodss/yaml v1.0.1-0.20190212211648-25d852aebe32
+	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
+	github.com/kubernetes-client/go v0.0.0-20200222171647-9dac5e4c5400
 	github.com/operator-framework/operator-sdk v0.15.0
 	github.com/spf13/pflag v1.0.5
+	github.com/stretchr/testify v1.6.1 // indirect
+	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	k8s.io/api v0.0.0
 	k8s.io/apimachinery v0.0.0
 	k8s.io/client-go v12.0.0+incompatible

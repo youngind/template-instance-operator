@@ -3,6 +3,8 @@ package kscinstance
 import (
 	"context"
 
+	"fmt" // for test 
+
 	tmaxv1 "template-instance-operator/pkg/apis/tmax/v1"
 
 	corev1 "k8s.io/api/core/v1"
@@ -18,6 +20,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	"sigs.k8s.io/controller-runtime/pkg/source"
+	crdapi "github.com/kubernetes-client/go/kubernetes/client"
+	"template-instance-operator/internal/config"
 )
 
 var log = logf.Log.WithName("controller_kscinstance")
@@ -100,6 +104,25 @@ func (r *ReconcileKscInstance) Reconcile(request reconcile.Request) (reconcile.R
 		// Error reading the object - requeue the request.
 		return reconcile.Result{}, err
 	}
+
+	templateNameSpace := request.Namespace
+	templateName := instance.Spec.Template.Metadata.Name
+
+	c, err := config.LoadKubeConfig()
+	if err != nil {
+		return reconcile.Result{},err
+	}
+
+	clientset := crdapi.NewAPIClient(c)
+
+	response,_,_ := clientset.CustomObjectsApi.GetNamespacedCustomObject(context.Background(),"tmax.io","v1",templateNameSpace,"templates",templateName);
+
+	test := fmt.Sprintf("%v",response)
+	reqLogger.Info(test) // for test
+	
+
+	/* TODO */
+
 
 	// Define a new Pod object
 	pod := newPodForCR(instance)
